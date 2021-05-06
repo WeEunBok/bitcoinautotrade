@@ -38,66 +38,63 @@ def get_current_price(ticker):
 
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
-coin = sys.argv[1]
-file_name = "log-"+coin+".txt"
-file = open(file_name, 'w')
-file.write("autotrade start \n")
+print("autotrade start \n")
 
 my_money = get_balance("KRW")
 buy_money = 0
 krw = 0
 data = "coin : %s \n" % coin
-file.write(data)
+print(data)
 
 KRW_coin = "KRW-"+coin
 data = "KRW_coin : %s \n" % KRW_coin
-file.write(KRW_coin)
+print(KRW_coin)
 
 ###############################################################
 #최근 체결가
-#file.write(pyupbit.get_current_price("KRW-DOGE"))
+#print(pyupbit.get_current_price("KRW-DOGE"))
 
 #현재가
-#file.write(pyupbit.get_current_price(["KRW-DOGE", "KRW-XRP"]))
+#print(pyupbit.get_current_price(["KRW-DOGE", "KRW-XRP"]))
 
 #get_ohlcv 함수는 고가/시가/저가/종가/거래량
 #                           open        high         low       close      volume
 #2021-04-30 22:45:00  65529000.0  65622000.0  65369000.0  65607000.0  178.252793
 #df = pyupbit.get_ohlcv("KRW-DOGE")
-#file.write(df.tail())
+#print(df.tail())
 
 #interval 파라미터는 조회단위를 지정합니다. 파라미터에는 다음 값을 지정할 수 있습니다.
 #day/minute1/minute3/minute5/minute10/minute15/minute30/minute60/minute240/week/month
-#file.write(pyupbit.get_ohlcv("KRW-DOGE", interval="day")              # 일봉 데이터 (5일)
-#file.write(pyupbit.get_ohlcv("KRW-DOGE", interval="minute1"))         # 분봉 데이터
-#file.write(pyupbit.get_ohlcv("KRW-DOGE", interval="minute5"))         # 분봉 데이터
-#file.write(pyupbit.get_ohlcv("KRW-DOGE", interval="week"))            # 주봉 데이터
+#print(pyupbit.get_ohlcv("KRW-DOGE", interval="day")              # 일봉 데이터 (5일)
+#print(pyupbit.get_ohlcv("KRW-DOGE", interval="minute1"))         # 분봉 데이터
+#print(pyupbit.get_ohlcv("KRW-DOGE", interval="minute5"))         # 분봉 데이터
+#print(pyupbit.get_ohlcv("KRW-DOGE", interval="week"))            # 주봉 데이터
 
 #df = pyupbit.get_ohlcv("KRW-DOGE", interval="minute1", count=1)
-#file.write(df.high[0])
+#print(df.high[0])
 
 
 #get_orderbook 함수는 매수/매도 호가 정보를 조회합니다.
 # * market : 암호화폐 티커
 # * timestamp : 조회시간 (단위 ms)
 # * orderbook_units : 매도호가/매수호가 정보
-#file.write(pyupbit.get_orderbook(tickers=["KRW-DOGE", "KRW-XRP"]))
+#print(pyupbit.get_orderbook(tickers=["KRW-DOGE", "KRW-XRP"]))
 #[{'market': 'KRW-DOGE', 'timestamp': 1619788491459, 'total_ask_size': 4.45776086, 'total_bid_size': 3.66528398, 'orderbook_units': {'ask_price': 64507000.0, 'bid_price': 64502000.0, 'ask_size': 3.53148249, 'bid_size': 0.0521755}
 
 #매도
 #원화 시장에 리플을 600원에 20개 매도
-#file.write(upbit.sell_limit_order("KRW-XRP", 600, 20))
+#print(upbit.sell_limit_order("KRW-XRP", 600, 20))
 
 #매수
 #리플을 613원에 10개 매수
-#file.write(upbit.buy_limit_order("KRW-XRP", 613, 10))
+#print(upbit.buy_limit_order("KRW-XRP", 613, 10))
 
 #시장가 매수/매도
 #주문한 10000원은 수수료가 포함된 금액
-#file.write(upbit.buy_market_order("KRW-XRP", 10000))
+#print(upbit.buy_market_order("KRW-XRP", 10000))
 
 #리플 30개를 시장가 매도
-#file.write(upbit.sell_market_order("KRW-XRP", 30))
+#print(upbit.sell_market_order("KRW-XRP", 30))
 ###############################################################
 
 #매수할 종목은 거래량 전날보다 많은 애들 기준?
@@ -127,14 +124,14 @@ while True:
                 if krw > 5000:
                     #upbit.buy_market_order(KRW_coin, krw) # 비트코인 매수
                     data = "BUY_COIN! : %f \n" % current_price
-                    file.write(data)
+                    print(data)
 
         if krw != 0:
             if ((current_price / buy_money) - 1) * 100 > 0.5:
                 coin_price = get_balance(coin)
                 #upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
                 data = "SELL_PLUS! : %f \n" % current_price
-                file.write(data)
+                print(data)
                 buy_money = 0
                 krw = 0
     
@@ -143,7 +140,7 @@ while True:
                 coin_price = get_balance(coin)
                 #upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
                 data = "SELL_MINUS! : %f \n" % current_price
-                file.write(data)
+                print(data)
                 buy_money = 0
                 krw = 0
 
