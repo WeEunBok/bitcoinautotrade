@@ -38,13 +38,14 @@ def get_current_price(ticker):
 
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
-file = open('log.txt', 'w')
+coin = sys.argv[1]
+file_name = "log-"+coin+".txt"
+file = open(file_name, 'w')
 file.write("autotrade start \n")
 
 my_money = get_balance("KRW")
 buy_money = 0
 krw = 0
-coin = sys.argv[1]
 data = "coin : %s \n" % coin
 file.write(data)
 
@@ -124,14 +125,14 @@ while True:
                 krw = current_krw / 110
                 buy_money = current_price
                 if krw > 5000:
-                    upbit.buy_market_order(KRW_coin, krw) # 비트코인 매수
+                    #upbit.buy_market_order(KRW_coin, krw) # 비트코인 매수
                     data = "BUY_COIN! : %f \n" % current_price
                     file.write(data)
 
         if krw != 0:
             if ((current_price / buy_money) - 1) * 100 > 0.5:
                 coin_price = get_balance(coin)
-                upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
+                #upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
                 data = "SELL_PLUS! : %f \n" % current_price
                 file.write(data)
                 buy_money = 0
@@ -140,7 +141,7 @@ while True:
         if krw != 0:
             if ((current_price / buy_money) - 1) * 100 < -1.0:
                 coin_price = get_balance(coin)
-                upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
+                #upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
                 data = "SELL_MINUS! : %f \n" % current_price
                 file.write(data)
                 buy_money = 0
