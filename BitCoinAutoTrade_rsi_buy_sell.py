@@ -108,8 +108,10 @@ while True:
                 #file.flush()
                 
                 if i == 0 and j == 0:
-                    file.write("첫번째\n")
-                    file.flush()
+                    #file.write("첫번째\n")
+                    #file.flush()
+                    up_arr[0][0]   = 0
+                    down_arr[0][0] = 0
                 else:
                     #등락 계산(T분 종가- T-1분 종가) 배열에 저장
                     if (minute_ohlcv.close[i+j] - minute_ohlcv.close[i+j-1]) >= 0:
@@ -165,7 +167,12 @@ while True:
         #print(rsi_arr)
         #print(rsi_arr[29])
         
-        date = "rsi_price = : %s" % rsi_arr[29]
+        #data = "now_date[29] : %s" % datetime.datetime.now()
+        #file.write(data)
+        #file.flush()
+        #data = "rsi_price = : %s" % rsi_arr[29]
+        #file.write(data)
+        #file.flush()
         
         if krw == 0:
             #rsi 30미만(과매도시) 매수
@@ -177,20 +184,32 @@ while True:
                     data = "BUY_COIN!  : %f \n" % current_price
                     file.write(data)
                     file.flush()
+                    data = "now_date[29] : %s" % datetime.datetime.now()
+                    file.write(data)
+                    file.flush()
+                    data = "rsi_price = : %s" % rsi_arr[29]
+                    file.write(data)
+                    file.flush()
 
         if krw != 0:
             #rsi 65이상(과매수시) 매도
             if rsi_arr[29] >= 65:
                 coin_price = get_balance(coin)
                 #upbit.sell_market_order(KRW_coin, coin_price) # 비트코인 전량 매도
-                data = "SELL_PLUS! : %f \n" % current_price
+                data = "SELL_COIN! : %f \n" % current_price
+                file.write(data)
+                file.flush()
+                data = "now_date[29] : %s" % datetime.datetime.now()
+                file.write(data)
+                file.flush()
+                data = "rsi_price = : %s" % rsi_arr[29]
                 file.write(data)
                 file.flush()
                 buy_money = 0
                 krw = 0
 
-        time.sleep(1)
+        time.sleep(5)
     except Exception as e:
         print(e)
         file.close()
-        time.sleep(1)
+        time.sleep(5)
