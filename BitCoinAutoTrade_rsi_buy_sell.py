@@ -4,8 +4,8 @@ import datetime
 import sys
 import numpy
 
-access = "ar3zJIbdK9Ng3d1ViD1hV89xbxlgUCeQz0cpxBdB"          # 본인 값으로 변경
-secret = "QvxWjnGcqSpGy0WSlSrbVvwC5MiE7wQHQy6X7Cny"          # 본인 값으로 변경
+access = "v6hDIbgpazn9CZeKHy6yMwWpi6zzbc58dlX90QvA"          # 본인 값으로 변경
+secret = "XxnUYUz9zUKwWLlMBRhsBRuVNxUbBxIod2DQX7fX"          # 본인 값으로 변경
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
