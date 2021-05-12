@@ -4,8 +4,8 @@ import datetime
 import sys
 import numpy
 
-access = "v6hDIbgpazn9CZeKHy6yMwWpi6zzbc58dlX90QvA"# 본인 값으로 변경
-secret = "XxnUYUz9zUKwWLlMBRhsBRuVNxUbBxIod2DQX7fX"# 본인 값으로 변경
+access = "KVnT9WKXqSPXW78McpUrBErHxbOeCR9v9XZGOAzE"# 본인 값으로 변경
+secret = "SmBGJ9EiYAKoqDQx7VAnnhxqJz9YHygZJyNnKfHJ"# 본인 값으로 변경
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
@@ -40,7 +40,7 @@ def get_current_price(ticker):
 upbit = pyupbit.Upbit(access, secret)
 #INPUT 값 받기
 coin = sys.argv[1]
-#coin = "BTC"
+#coin = "DOGE"
 file_name = "multi_log-"+coin+".txt"
 file = open(file_name, 'w')
 file.write("autotrade start \n")
@@ -160,12 +160,12 @@ while True:
         #print(rsi_arr)
         #print(rsi_arr[29])
         
-        #data = "now_date : %s \n" % datetime.datetime.now()
-        #file.write(data)
-        #file.flush()
-        #data = "rsi_price = : %f \n" % rsi_arr[29]
-        #file.write(data)
-        #file.flush()
+        data = "now_date : %s \n" % datetime.datetime.now()
+        file.write(data)
+        file.flush()
+        data = "rsi_price = : %f \n" % rsi_arr[29]
+        file.write(data)
+        file.flush()
 
         # 현재가
         current_price = get_current_price(KRW_coin)
@@ -190,7 +190,7 @@ while True:
                     
                 buy_money = current_price
                 #if krw > 5000:
-                if current_krw >= 10000:
+                if current_krw >= krw:
                     upbit.buy_market_order(KRW_coin, krw*0.9995) # 비트코인 매수
                     data = "BUY_COIN2!  : %f \n" % current_price
                     file.write(data)
@@ -211,7 +211,7 @@ while True:
                 krw = 10000
                 buy_money = current_price
                 #if krw > 5000:
-                if current_krw >= 10000:
+                if current_krw >= krw:
                     upbit.buy_market_order(KRW_coin, krw*0.9995) # 비트코인 매수
                     data = "BUY_COIN!  : %f \n" % current_price
                     file.write(data)
