@@ -160,12 +160,12 @@ while True:
         #print(rsi_arr)
         #print(rsi_arr[29])
         
-        data = "now_date : %s \n" % datetime.datetime.now()
-        file.write(data)
-        file.flush()
-        data = "rsi_price = : %f \n" % rsi_arr[29]
-        file.write(data)
-        file.flush()
+        #data = "now_date : %s \n" % datetime.datetime.now()
+        #file.write(data)
+        #file.flush()
+        #data = "rsi_price = : %f \n" % rsi_arr[29]
+        #file.write(data)
+        #file.flush()
 
         # 현재가
         current_price = get_current_price(KRW_coin)
