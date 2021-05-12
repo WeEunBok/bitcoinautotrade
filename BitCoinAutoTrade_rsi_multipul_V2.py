@@ -39,8 +39,8 @@ def get_current_price(ticker):
 #로그인
 upbit = pyupbit.Upbit(access, secret)
 #INPUT 값 받기
-#coin = sys.argv[1]
-coin = "BTC"
+coin = sys.argv[1]
+#coin = "BTC"
 file_name = "multi_log-"+coin+".txt"
 file = open(file_name, 'w')
 file.write("autotrade start \n")
